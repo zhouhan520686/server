@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <title>登录</title>
+</head>
+<body>
+    <form id="singInFrom">
+        <div>
+            <label>
+                <span>用户名</span>
+                <input type="text" name="name">
+            </label>
+        </div> 
+        <div>
+            <label>
+                <span>密码</span>
+                <input type="password" name="password">
+            </label>
+        </div>
+        <button type="submit">登录</button>
+
+    </form>
+
+    <script>
+        const $singInFrom = $('#singInFrom')
+        $singInFrom.on('submit',(e)=>{
+            e.preventDefault();
+            const name = $singInFrom.find('input[name=name]').val()
+            const password = $singInFrom.find('input[name=password]').val()
+            $.ajax({
+                method: 'POST',
+                contentType: 'application/json',
+                url: '/signin',
+                data: JSON.stringify({name, password})
+            }).then(()=>{
+                alert('登录成功')
+                location.href='/index.html'
+            },()=>{
+                alert('密码错误')
+                console.log(response)
+            })
+        })
+    </script>
+</body>
+</html>
+ 
